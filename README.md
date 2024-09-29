@@ -1,4 +1,4 @@
-# Gilded Rose starting position in Kotlin
+# Gilded Rose in Kotlin
 
 Here you can see my take on the Gilded Rose Refactoring Kata.
 
