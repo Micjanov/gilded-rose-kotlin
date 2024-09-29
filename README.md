@@ -19,5 +19,5 @@ You should make sure the gradle commands shown above work when you execute them 
 
 ## Run the TextTest approval test that comes with this project
 
-There are instructions in the [TextTest Readme](../texttests/README.md) for setting up TextTest. What's unusual for the Java version is there are two executables listed in [config.gr](../texttests/config.gr) for Java. One uses Gradle wrapped in a python script, the other relies on your CLASSPATH being set correctly in [environment.gr](../texttests/environment.gr).
+Run ```./start_texttest.sh``` in this folder.
 
