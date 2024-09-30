@@ -12,7 +12,7 @@ import kotlin.random.Random
 
 internal class ConjuredItemTest {
     @RepeatedTest(value = 20)
-    fun `quality decreases by 2 before sellByDate`() {
+    fun `quality decreases by 2 if sellIn is greater than 0`() {
         GIVEN
         val sellIn = Random.nextInt(2, 51)
         val quality = Random.nextInt(2, 51)
@@ -28,7 +28,7 @@ internal class ConjuredItemTest {
     }
 
     @RepeatedTest(value = 20)
-    fun `quality decreases by 4 when sellByDate has been passed`() {
+    fun `quality decreases by 4 if sellIn is 0 or less`() {
         GIVEN
         val sellIn = -Random.nextInt(4, 51)
         val quality = Random.nextInt(4, 51)

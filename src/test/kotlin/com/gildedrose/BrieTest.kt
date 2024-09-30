@@ -12,7 +12,7 @@ import kotlin.random.Random
 
 internal class BrieTest {
     @RepeatedTest(value = 20)
-    fun `quality increases by 1 before sellByDate`() {
+    fun `quality increases by 1 if sellIn is greater than zero`() {
         GIVEN
         val sellIn = Random.nextInt(1,50)
         val quality = Random.nextInt(0,50)
@@ -28,7 +28,7 @@ internal class BrieTest {
     }
 
     @RepeatedTest(value = 20)
-    fun `quality increases by 2 when sellByDate has been passed`() {
+    fun `quality increases by 2 if sellIn is zero or less`() {
         GIVEN
         val sellIn = -Random.nextInt(0,50)
         val quality = Random.nextInt(0,49)

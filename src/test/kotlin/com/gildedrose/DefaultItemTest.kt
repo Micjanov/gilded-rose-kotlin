@@ -11,7 +11,7 @@ import kotlin.random.Random
 
 internal class DefaultItemTest {
     @RepeatedTest(value = 20)
-    fun `quality decreases by 1 before sellByDate`() {
+    fun `quality decreases by 1 if sellIn is greater than 0`() {
         GIVEN
         val sellIn = Random.nextInt(1, 51)
         val quality = Random.nextInt(1, 51)
@@ -27,7 +27,7 @@ internal class DefaultItemTest {
     }
 
     @RepeatedTest(value = 20)
-    fun `quality decreases by 2 when sellByDate has been passed`() {
+    fun `quality decreases by 2 if sellIn is less than 0`() {
         GIVEN
         val sellIn = -Random.nextInt(0, 51)
         val quality = Random.nextInt(2, 51)
