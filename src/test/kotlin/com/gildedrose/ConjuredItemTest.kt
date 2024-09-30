@@ -15,7 +15,7 @@ internal class ConjuredItemTest {
     fun `quality decreases by 2 if sellIn is greater than 0`() {
         GIVEN
         val sellIn = Random.nextInt(2, 51)
-        val quality = Random.nextInt(2, 51)
+        val quality = Random.nextInt(0, 51)
         val item = Item(MANA_CAKE.itemName, sellIn, quality)
 
         WHEN
@@ -24,14 +24,14 @@ internal class ConjuredItemTest {
         THEN
         assertEquals(MANA_CAKE.itemName, updatedItem.name)
         assertEquals(sellIn - 1, updatedItem.sellIn)
-        assertEquals(quality - 2, updatedItem.quality)
+        assertEquals((quality - 2).coerceIn(0, 50), updatedItem.quality)
     }
 
     @RepeatedTest(value = 20)
     fun `quality decreases by 4 if sellIn is 0 or less`() {
         GIVEN
         val sellIn = -Random.nextInt(4, 51)
-        val quality = Random.nextInt(4, 51)
+        val quality = Random.nextInt(0, 51)
         val item = Item(MANA_CAKE.itemName, sellIn, quality)
 
         WHEN
@@ -40,7 +40,7 @@ internal class ConjuredItemTest {
         THEN
         assertEquals(MANA_CAKE.itemName, updatedItem.name)
         assertEquals(sellIn - 1, updatedItem.sellIn)
-        assertEquals(quality - 4, updatedItem.quality)
+        assertEquals((quality - 4).coerceIn(0, 50), updatedItem.quality)
     }
 
     @RepeatedTest(value = 20)

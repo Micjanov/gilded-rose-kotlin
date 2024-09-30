@@ -15,7 +15,7 @@ internal class BrieTest {
     fun `quality increases by 1 if sellIn is greater than zero`() {
         GIVEN
         val sellIn = Random.nextInt(1,50)
-        val quality = Random.nextInt(0,50)
+        val quality = Random.nextInt(0,51)
         val item = Item(AGED_BRIE.itemName, sellIn, quality)
 
         WHEN
@@ -24,14 +24,14 @@ internal class BrieTest {
         THEN
         assertEquals(AGED_BRIE.itemName, updatedItem.name)
         assertEquals(sellIn - 1, updatedItem.sellIn)
-        assertEquals(quality + 1, updatedItem.quality)
+        assertEquals((quality + 1).coerceIn(0, 50), updatedItem.quality)
     }
 
     @RepeatedTest(value = 20)
     fun `quality increases by 2 if sellIn is zero or less`() {
         GIVEN
         val sellIn = -Random.nextInt(0,50)
-        val quality = Random.nextInt(0,49)
+        val quality = Random.nextInt(0,51)
         val item = Item(AGED_BRIE.itemName, sellIn, quality)
 
         WHEN
@@ -40,7 +40,7 @@ internal class BrieTest {
         THEN
         assertEquals(AGED_BRIE.itemName, updatedItem.name)
         assertEquals(sellIn - 1, updatedItem.sellIn)
-        assertEquals(quality + 2, updatedItem.quality)
+        assertEquals((quality + 2).coerceIn(0, 50), updatedItem.quality)
     }
 
     @RepeatedTest(value = 20)

@@ -14,7 +14,7 @@ internal class DefaultItemTest {
     fun `quality decreases by 1 if sellIn is greater than 0`() {
         GIVEN
         val sellIn = Random.nextInt(1, 51)
-        val quality = Random.nextInt(1, 51)
+        val quality = Random.nextInt(0, 51)
         val item = Item("foo", sellIn, quality)
 
         WHEN
@@ -23,14 +23,14 @@ internal class DefaultItemTest {
         THEN
         assertEquals("foo", updatedItem.name)
         assertEquals(sellIn - 1, updatedItem.sellIn)
-        assertEquals(quality - 1, updatedItem.quality)
+        assertEquals((quality - 1).coerceIn(0, 50), updatedItem.quality)
     }
 
     @RepeatedTest(value = 20)
     fun `quality decreases by 2 if sellIn is less than 0`() {
         GIVEN
         val sellIn = -Random.nextInt(0, 51)
-        val quality = Random.nextInt(2, 51)
+        val quality = Random.nextInt(0, 51)
         val item = Item("foo", sellIn, quality)
 
         WHEN
@@ -39,7 +39,7 @@ internal class DefaultItemTest {
         THEN
         assertEquals("foo", updatedItem.name)
         assertEquals(sellIn - 1, updatedItem.sellIn)
-        assertEquals(quality - 2, updatedItem.quality)
+        assertEquals((quality - 2).coerceIn(0, 50), updatedItem.quality)
     }
 
     @RepeatedTest(value = 20)
