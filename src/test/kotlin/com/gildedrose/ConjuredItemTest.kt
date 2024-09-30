@@ -31,7 +31,7 @@ internal class ConjuredItemTest {
     fun `quality decreases by 4 when sellByDate has been passed`() {
         GIVEN
         val sellIn = -Random.nextInt(4, 51)
-        val quality = Random.nextInt(2, 51)
+        val quality = Random.nextInt(4, 51)
         val item = Item(MANA_CAKE.itemName, sellIn, quality)
 
         WHEN
