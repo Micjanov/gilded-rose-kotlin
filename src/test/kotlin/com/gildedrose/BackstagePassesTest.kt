@@ -44,9 +44,9 @@ internal class BackstagePassesTest {
     }
 
     @RepeatedTest(value = 20)
-    fun `quality increases by 3 when sellIn is greater than 0 and less than 6`() {
+    fun `quality becomes 0 when sellIn is greater than or equal to 0`() {
         GIVEN
-        val sellIn = Random.nextInt(1, 6)
+        val sellIn = -Random.nextInt(0, 5)
         val quality = Random.nextInt(0, 51)
         val item = Item(BACKSTAGE_PASSES.itemName, sellIn, quality)
 
@@ -56,7 +56,7 @@ internal class BackstagePassesTest {
         THEN
         assertEquals(BACKSTAGE_PASSES.itemName, updatedItem.name)
         assertEquals(sellIn - 1, updatedItem.sellIn)
-        assertEquals((quality + 3).coerceIn(0, 50), updatedItem.quality)
+        assertEquals(0, updatedItem.quality)
     }
 
     @RepeatedTest(value = 20)
