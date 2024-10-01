@@ -44,7 +44,7 @@ internal class BackstagePassesTest {
     }
 
     @RepeatedTest(value = 20)
-    fun `quality becomes 0 when sellIn is greater than or equal to 0`() {
+    fun `quality becomes 0 when sellIn is smaller than or equal to 0`() {
         GIVEN
         val sellIn = -Random.nextInt(0, 5)
         val quality = Random.nextInt(0, 51)
