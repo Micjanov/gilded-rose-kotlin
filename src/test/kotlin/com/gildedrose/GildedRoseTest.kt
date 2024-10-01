@@ -97,6 +97,23 @@ internal class GildedRoseTest {
         assertEquals(MANA_CAKE.itemName, updatedItem.name)
         assertEquals(ConjuredItem::class, updatedItem::class)
     }
+
+    @Test
+    fun `when input contains an item with an unrecognizable name, it should return the item as class DefaultItem`() {
+        GIVEN
+        val sellIn = Random.nextInt(1, 50)
+        val quality = Random.nextInt(0, 50)
+        val item = Item("foobar", sellIn, quality)
+
+        WHEN
+        val app = GildedRose(listOf(item))
+        app.updateQuality()
+
+        THEN
+        val updatedItem = app.items.single()
+        assertEquals("foobar", updatedItem.name)
+        assertEquals(DefaultItem::class, updatedItem::class)
+    }
 }
 
 

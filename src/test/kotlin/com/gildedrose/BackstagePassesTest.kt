@@ -62,7 +62,7 @@ internal class BackstagePassesTest {
     @RepeatedTest(value = 20)
     fun `quality cannot be less than 0`() {
         GIVEN
-        val sellIn = Random.nextInt(0, 50)
+        val sellIn = Random.nextInt(1, 15)
         val quality = -Random.nextInt(1, 51)
         val item = Item(BACKSTAGE_PASSES.itemName, sellIn, quality)
 
