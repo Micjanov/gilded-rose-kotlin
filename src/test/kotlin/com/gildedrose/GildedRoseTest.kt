@@ -12,7 +12,7 @@ import kotlin.random.Random
 
 internal class GildedRoseTest {
     @RepeatedTest(10)
-    fun `number of items in input should be the same as in output`() {
+    fun `number of items in output should be the same as in input`() {
         GIVEN
         val listSize = Random.nextInt(0, 50)
         val items = List(listSize) {
@@ -31,7 +31,7 @@ internal class GildedRoseTest {
     }
 
     @Test
-    fun `when input contains an item with name 'Aged Brie', it should return the item as type Brie`() {
+    fun `when input contains an item with name 'Aged Brie', it should return the item as class Brie`() {
         GIVEN
         val sellIn = Random.nextInt(1, 50)
         val quality = Random.nextInt(0, 50)
@@ -48,7 +48,7 @@ internal class GildedRoseTest {
     }
 
     @Test
-    fun `when input contains an item with name 'Backstage passes to a TAFKAL80ETC concert', it should return the item as type BackstagePasses`() {
+    fun `when input contains an item with name 'Backstage passes to a TAFKAL80ETC concert', it should return the item as class BackstagePasses`() {
         GIVEN
         val sellIn = Random.nextInt(1, 50)
         val quality = Random.nextInt(0, 50)
@@ -65,7 +65,7 @@ internal class GildedRoseTest {
     }
 
     @Test
-    fun `when input contains an item with name 'Sulfuras, Hand of Ragnaros', it should return the item as type Sulfuras`() {
+    fun `when input contains an item with name 'Sulfuras, Hand of Ragnaros', it should return the item as class Sulfuras`() {
         GIVEN
         val sellIn = Random.nextInt(1, 50)
         val quality = Random.nextInt(0, 50)
@@ -82,7 +82,7 @@ internal class GildedRoseTest {
     }
 
     @Test
-    fun `when input contains an item with name 'Conjured Mana Cake', it should return the item as type ConjuredItem`() {
+    fun `when input contains an item with name 'Conjured Mana Cake', it should return the item as class ConjuredItem`() {
         GIVEN
         val sellIn = Random.nextInt(1, 50)
         val quality = Random.nextInt(0, 50)
