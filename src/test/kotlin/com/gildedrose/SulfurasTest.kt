@@ -7,23 +7,23 @@ import com.gildedrose.items.Item
 import com.gildedrose.items.ItemNames.SULFURAS
 import com.gildedrose.items.Sulfuras
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.RepeatedTest
-import kotlin.random.Random
+import org.junit.jupiter.api.Test
 
 internal class SulfurasTest {
-    @RepeatedTest(value = 20)
+    @Test
     fun `quality should always be 80 and sellIn does not update`() {
-        GIVEN
-        val sellIn = Random.nextInt()
-        val quality = Random.nextInt()
-        val item = Item(SULFURAS.itemName, sellIn, quality)
+        NumberProvider(-20..20, -20..50)
+            .forEachCombination { sellIn, quality ->
+                GIVEN
+                val item = Item(SULFURAS.itemName, sellIn, quality)
 
-        WHEN
-        val updatedItem = Sulfuras.fromItem(item).update()
+                WHEN
+                val updatedItem = Sulfuras.fromItem(item).update()
 
-        THEN
-        assertEquals(SULFURAS.itemName, updatedItem.name)
-        assertEquals(sellIn, updatedItem.sellIn)
-        assertEquals(80, updatedItem.quality)
+                THEN
+                assertEquals(SULFURAS.itemName, updatedItem.name)
+                assertEquals(sellIn, updatedItem.sellIn)
+                assertEquals(80, updatedItem.quality)
+            }
     }
 }

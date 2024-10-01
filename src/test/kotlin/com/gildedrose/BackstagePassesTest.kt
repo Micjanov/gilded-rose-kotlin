@@ -5,89 +5,93 @@ import com.gildedrose.TestMarkers.THEN
 import com.gildedrose.TestMarkers.WHEN
 import com.gildedrose.items.BackstagePasses
 import com.gildedrose.items.Item
-import com.gildedrose.items.ItemNames.*
+import com.gildedrose.items.ItemNames.BACKSTAGE_PASSES
 import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.RepeatedTest
-import kotlin.random.Random
+import org.junit.jupiter.api.Test
 
 internal class BackstagePassesTest {
-    @RepeatedTest(value = 20)
+    @Test
     fun `quality increases by 1 if sellIn is greater than 10`() {
-        GIVEN
-        val sellIn = Random.nextInt(11, 50)
-        val quality = Random.nextInt(0, 51)
-        val item = Item(BACKSTAGE_PASSES.itemName, sellIn, quality)
+        NumberProvider(11..20, 0..50)
+            .forEachCombination { sellIn, quality ->
+                GIVEN
+                val item = Item(BACKSTAGE_PASSES.itemName, sellIn, quality)
 
-        WHEN
-        val updatedItem = BackstagePasses.fromItem(item).update()
+                WHEN
+                val updatedItem = BackstagePasses.fromItem(item).update()
 
-        THEN
-        assertEquals(BACKSTAGE_PASSES.itemName, updatedItem.name)
-        assertEquals(sellIn - 1, updatedItem.sellIn)
-        assertEquals((quality + 1).coerceIn(0, 50), updatedItem.quality)
+                THEN
+                assertEquals(BACKSTAGE_PASSES.itemName, updatedItem.name)
+                assertEquals(sellIn - 1, updatedItem.sellIn)
+                assertEquals((quality + 1).coerceIn(0, 50), updatedItem.quality)
+            }
     }
 
-    @RepeatedTest(value = 20)
+    @Test
     fun `quality increases by 2 if sellIn is greater than 5 and less than 11`() {
-        GIVEN
-        val sellIn = Random.nextInt(6, 11)
-        val quality = Random.nextInt(0, 51)
-        val item = Item(BACKSTAGE_PASSES.itemName, sellIn, quality)
+        NumberProvider(6..10, 0..50)
+            .forEachCombination { sellIn, quality ->
+                GIVEN
+                val item = Item(BACKSTAGE_PASSES.itemName, sellIn, quality)
 
-        WHEN
-        val updatedItem = BackstagePasses.fromItem(item).update()
+                WHEN
+                val updatedItem = BackstagePasses.fromItem(item).update()
 
-        THEN
-        assertEquals(BACKSTAGE_PASSES.itemName, updatedItem.name)
-        assertEquals(sellIn - 1, updatedItem.sellIn)
-        assertEquals((quality + 2).coerceIn(0, 50), updatedItem.quality)
+                THEN
+                assertEquals(BACKSTAGE_PASSES.itemName, updatedItem.name)
+                assertEquals(sellIn - 1, updatedItem.sellIn)
+                assertEquals((quality + 2).coerceIn(0, 50), updatedItem.quality)
+            }
     }
 
-    @RepeatedTest(value = 20)
+    @Test
     fun `quality becomes 0 when sellIn is smaller than or equal to 0`() {
-        GIVEN
-        val sellIn = -Random.nextInt(0, 5)
-        val quality = Random.nextInt(0, 51)
-        val item = Item(BACKSTAGE_PASSES.itemName, sellIn, quality)
+        NumberProvider(-4..0, 0..50)
+            .forEachCombination { sellIn, quality ->
+                GIVEN
+                val item = Item(BACKSTAGE_PASSES.itemName, sellIn, quality)
 
-        WHEN
-        val updatedItem = BackstagePasses.fromItem(item).update()
+                WHEN
+                val updatedItem = BackstagePasses.fromItem(item).update()
 
-        THEN
-        assertEquals(BACKSTAGE_PASSES.itemName, updatedItem.name)
-        assertEquals(sellIn - 1, updatedItem.sellIn)
-        assertEquals(0, updatedItem.quality)
+                THEN
+                assertEquals(BACKSTAGE_PASSES.itemName, updatedItem.name)
+                assertEquals(sellIn - 1, updatedItem.sellIn)
+                assertEquals(0, updatedItem.quality)
+            }
     }
 
-    @RepeatedTest(value = 20)
+    @Test
     fun `quality cannot be less than 0`() {
-        GIVEN
-        val sellIn = Random.nextInt(1, 15)
-        val quality = -Random.nextInt(1, 51)
-        val item = Item(BACKSTAGE_PASSES.itemName, sellIn, quality)
+        NumberProvider(1..20, -15..-1)
+            .forEachCombination { sellIn, quality ->
+                GIVEN
+                val item = Item(BACKSTAGE_PASSES.itemName, sellIn, quality)
 
-        WHEN
-        val updatedItem = BackstagePasses.fromItem(item).update()
+                WHEN
+                val updatedItem = BackstagePasses.fromItem(item).update()
 
-        THEN
-        assertEquals(BACKSTAGE_PASSES.itemName, updatedItem.name)
-        assertEquals(sellIn - 1, updatedItem.sellIn)
-        assertEquals(0, updatedItem.quality)
+                THEN
+                assertEquals(BACKSTAGE_PASSES.itemName, updatedItem.name)
+                assertEquals(sellIn - 1, updatedItem.sellIn)
+                assertEquals(0, updatedItem.quality)
+            }
     }
 
-    @RepeatedTest(value = 20)
+    @Test
     fun `quality cannot be greater than 50`() {
-        GIVEN
-        val sellIn = Random.nextInt(1, 50)
-        val quality = Random.nextInt(51, 100)
-        val item = Item(BACKSTAGE_PASSES.itemName, sellIn, quality)
+        NumberProvider(1..20, 51..70)
+            .forEachCombination { sellIn, quality ->
+                GIVEN
+                val item = Item(BACKSTAGE_PASSES.itemName, sellIn, quality)
 
-        WHEN
-        val updatedItem = BackstagePasses.fromItem(item).update()
+                WHEN
+                val updatedItem = BackstagePasses.fromItem(item).update()
 
-        THEN
-        assertEquals(BACKSTAGE_PASSES.itemName, updatedItem.name)
-        assertEquals(sellIn - 1, updatedItem.sellIn)
-        assertEquals(50, updatedItem.quality)
+                THEN
+                assertEquals(BACKSTAGE_PASSES.itemName, updatedItem.name)
+                assertEquals(sellIn - 1, updatedItem.sellIn)
+                assertEquals(50, updatedItem.quality)
+            }
     }
 }
