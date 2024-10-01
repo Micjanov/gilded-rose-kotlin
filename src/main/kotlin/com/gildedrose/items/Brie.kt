@@ -7,6 +7,7 @@ class Brie(
 ) : Item(name, sellIn, quality) {
     fun update(): Brie {
         quality = when {
+            quality < 0 -> 0
             sellIn <= 0 -> quality + 2
             else -> quality + 1
         }
